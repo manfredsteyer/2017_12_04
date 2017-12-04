@@ -9,7 +9,19 @@ import { Router } from "@angular/router";
 })
 export class BasketComponent {
 
-  constructor() {}
+  constructor() {
+
+    /*
+    document.addEventListener('keydown', (e) => {
+      console.debug('e', e);
+      
+      if (e.keyCode == 9) {
+        e.preventDefault();
+      }
+    }, true);
+    */
+
+  }
 
 
 }

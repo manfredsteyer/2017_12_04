@@ -3,6 +3,20 @@
     <h1 class="title">Flight Edit</h1>
   </div>
   <div class="content">
+
+
+    <div *ngIf="showWarning" style="position:relative; z-index: 101" class="alert alert-warning">
+        <div>
+        Daten wurden nicht gespeichert! Trotzdem Maske verlassen?
+        </div>
+        <p>&nbsp;</p>
+        <div>
+            <a class="btn btn-danger" (click)="decide(true)">Yes</a>
+            <a class="btn btn-default" (click)="decide(false)">No</a>
+        </div>
+    </div>
+
+
     <p>Id: {{id}}</p>
     <p>ShowDetails: {{showDetails}}</p>
   </div>

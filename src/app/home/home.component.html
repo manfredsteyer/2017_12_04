@@ -1,1 +1,12 @@
-<h1>Willkommen!</h1>
+<h1 *ngIf="userName">Willkommen, {{userName}}!</h1>
+<h1 *ngIf="!userName">Willkommen!</h1>
+
+<div class="card">
+    <div class="content">
+
+        <button class="btn btn-primary" (click)="logIn()">Login</button>
+        <button class="btn btn-primary" (click)="logOut()">Logout</button>
+
+    </div>
+
+</div>
