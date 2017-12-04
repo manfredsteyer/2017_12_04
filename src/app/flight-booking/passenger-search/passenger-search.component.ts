@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { AuthService } from "../../shared/auth/auth.service";
 
 @Component({
   selector: 'app-passenger-search',
@@ -8,9 +9,11 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 })
 export class PassengerSearchComponent implements OnInit {
 
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
+    console.debug('userName', this.authService.userName);
   }
 
 }
+

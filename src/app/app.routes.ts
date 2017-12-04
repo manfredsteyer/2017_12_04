@@ -9,6 +9,13 @@ export const APP_ROUTES: Routes = [
     pathMatch: 'full'
   },
   {
+    path: 'flight-booking',
+    loadChildren: './flight-booking/flight-booking.module#FlightBookingModule',
+    data: {
+      preload: false
+    }
+  },
+  {
     path: 'basket',
     component: BasketComponent,
     outlet: 'aux'

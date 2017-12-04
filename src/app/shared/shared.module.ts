@@ -1,9 +1,10 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CityPipe } from './pipes/city.pipe';
 import { AuthService } from "./auth/auth.service";
 import { AuthGuard } from "./auth/auth.guard";
 import { ExitGuard } from "./exit/exit.guard";
+import { CustomPreloadingStrategy } from "./preload/custom-preloading-strategy.service";
 
 @NgModule({
   imports: [
@@ -12,13 +13,30 @@ import { ExitGuard } from "./exit/exit.guard";
   declarations: [
     CityPipe
   ],
-  providers: [
-    AuthService,
-    AuthGuard,
-    ExitGuard
-  ],
+  providers: [/* No providers here*/],
   exports: [
     CityPipe
   ]
 })
-export class SharedModule { }
+export class SharedModule { 
+
+  static forRoot(): ModuleWithProviders {
+    return {
+      ngModule: SharedModule,
+      providers: [
+        AuthService,
+        AuthGuard,
+        ExitGuard,
+        CustomPreloadingStrategy
+    ]
+    }
+  }
+
+  static forChild(): ModuleWithProviders {
+    return {
+      ngModule: SharedModule,
+      providers: []
+    }
+
+  }
+}

@@ -12,17 +12,22 @@ import { FlightService } from './flight-booking/flight-search/flight.service';
 import { CityPipe } from './shared/pipes/city.pipe';
 import { FlightBookingModule } from './flight-booking/flight-booking.module';
 import { HomeComponent } from './home/home.component';
-import { RouterModule } from '@angular/router';
+import { RouterModule, PreloadAllModules } from '@angular/router';
 import { APP_ROUTES } from './app.routes';
 import { FlightBookingComponent } from './flight-booking/flight-booking.component';
 import { BasketComponent } from "./basket/basket.component";
+import { SharedModule } from "./shared/shared.module";
+import { CustomPreloadingStrategy } from "./shared/preload/custom-preloading-strategy.service";
 
 @NgModule({
   imports: [
     BrowserModule,
     HttpClientModule,
-    FlightBookingModule,
-    RouterModule.forRoot(APP_ROUTES)
+    SharedModule.forRoot(),
+    // FlightBookingModule,
+    RouterModule.forRoot(APP_ROUTES, {
+      preloadingStrategy: CustomPreloadingStrategy
+    })
   ],
   declarations: [
     AppComponent,
@@ -38,3 +43,7 @@ import { BasketComponent } from "./basket/basket.component";
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+
+
+

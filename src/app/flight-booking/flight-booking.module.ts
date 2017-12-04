@@ -15,7 +15,7 @@ import { FlightBookingComponent } from './flight-booking.component';
   imports: [
     CommonModule,
     FormsModule,
-    SharedModule,
+    SharedModule.forChild(),
     RouterModule.forChild(FLIGHT_BOOKING_ROUTES)
   ],
   declarations: [
