@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Flight } from '../../entities/flight';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { FlightService } from './flight.service';
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
   selector: 'flight-search',
@@ -12,8 +13,10 @@ import { FlightService } from './flight.service';
 export class FlightSearchComponent implements OnInit {
 
   from: string;
-  to: string;
+   to: string;
   // flights: Array<Flight> = [];
+   date: string = '2017-12-05T17:00:00.0000+01:00';
+
 
   get flights() {
     return this.flightService.flights;
@@ -30,11 +33,16 @@ export class FlightSearchComponent implements OnInit {
   // private http: HttpClient;
 
   constructor(
+    private translate: TranslateService,
     private flightService: FlightService) {
     // this.http = http;
   }
 
   ngOnInit() {
+    let txt = this.translate.instant('FLIGHT.found', {count: 47});
+    this.translate.get('FLIGHT.found', {count: 47}).subscribe(txt => console.debug(txt));
+
+    this.translate.setTranslation('de', { 'ERROR': 'Ups!' }, true);
   }
 
   search(): void {

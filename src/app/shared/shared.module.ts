@@ -5,17 +5,20 @@ import { AuthService } from "./auth/auth.service";
 import { AuthGuard } from "./auth/auth.guard";
 import { ExitGuard } from "./exit/exit.guard";
 import { CustomPreloadingStrategy } from "./preload/custom-preloading-strategy.service";
+import { DateValueAccessor } from "./dates/date.directive";
 
 @NgModule({
   imports: [
     CommonModule
   ],
   declarations: [
-    CityPipe
+    CityPipe,
+    DateValueAccessor
   ],
   providers: [/* No providers here*/],
   exports: [
-    CityPipe
+    CityPipe,
+    DateValueAccessor
   ]
 })
 export class SharedModule { 

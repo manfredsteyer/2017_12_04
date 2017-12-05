@@ -1,0 +1,11 @@
+{
+    "FLIGHTS": {
+      "title": "Flug Suchen",
+      "search": "Suchen",
+      "from": "Von",
+      "to": "Nach",
+      "401": "a",
+      "found": "{{count}} Flüge gefunden"
+    }
+}
+  

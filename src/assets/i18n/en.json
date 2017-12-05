@@ -1,0 +1,10 @@
+{
+    "FLIGHTS": {
+      "title": "Flug Search",
+      "search": "Search",
+      "from": "From",
+      "to": "To",
+      "found": "{{count}} Flights found"
+    }
+  }
+  

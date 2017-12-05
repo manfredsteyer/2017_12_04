@@ -10,13 +10,15 @@ import { RouterModule } from '@angular/router';
 import { FLIGHT_BOOKING_ROUTES } from './flight-booking.routes';
 import { FlightEditComponent } from './flight-edit/flight-edit.component';
 import { FlightBookingComponent } from './flight-booking.component';
+import { TranslateModule } from "@ngx-translate/core";
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     SharedModule.forChild(),
-    RouterModule.forChild(FLIGHT_BOOKING_ROUTES)
+    RouterModule.forChild(FLIGHT_BOOKING_ROUTES),
+    TranslateModule.forChild()
   ],
   declarations: [
     FlightSearchComponent,

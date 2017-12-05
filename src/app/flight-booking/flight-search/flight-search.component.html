@@ -1,27 +1,38 @@
 <div class="card">
 
   <div class="header">
-    <h2 class="title">Flight Search</h2>
+    <h2 class="title">{{ 'FLIGHTS.title' | translate }}</h2>
   </div>
   <div class="content">
 
     <form>
 
       <div class="form-group">
-        <label>From:</label>
+        <label>{{ 'FLIGHTS.from' | translate }}:</label>
         <input [(ngModel)]="from" name="from" class="form-control">
       </div>
+
       <div class="form-group">
-        <label>To:</label>
+        <label>{{ 'FLIGHTS.to' | translate }}:</label>
         <input [(ngModel)]="to" name="to" class="form-control">
       </div>
 
       <div class="form-group">
+        <label>Date:</label>
+        <input [(ngModel)]="date" date name="date" class="form-control">
+      </div>
+
+
+      <div class="form-group">
         <button (click)="search()" [disabled]="!from || !to" class="btn btn-default">
-          Search
+          {{ 'FLIGHTS.search' | translate }}
         </button>
       </div>
     </form>
+
+    <div *ngIf="flights.length > 0">
+      {{ 'FLIGHTS.found' | translate:{count: flights.length} }}
+    </div>
 
   </div>
 </div>
