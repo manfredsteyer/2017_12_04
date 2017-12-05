@@ -3,14 +3,14 @@ import { Subject } from "rxjs/Subject";
 
 @Injectable()
 export class TabbedPaneService {
-
-    constructor() { }
-
-    public nextPage$ = new Subject<void>();
+    public nextPage$ = new Subject<number>();
 
     next(): void {
-        this.nextPage$.next();
+        this.nextPage$.next(1);
     }
 
+    prev(): void {
+        this.nextPage$.next(-1);
+    }
 }
 

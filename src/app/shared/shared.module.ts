@@ -9,6 +9,7 @@ import { DateValueAccessor } from "./dates/date.directive";
 import { TabComponent } from "./tabbed-pane/tab/tab.component";
 import { TabbedPaneComponent } from "./tabbed-pane/tabbed-pane/tabbed-pane.component";
 import { BadComponent } from "./tabbed-pane/bad/bad.component";
+import { PagerComponent } from "./tabbed-pane/pager/pager.component";
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import { BadComponent } from "./tabbed-pane/bad/bad.component";
     DateValueAccessor,
     TabComponent,
     TabbedPaneComponent,
-    BadComponent
+    BadComponent,
+    PagerComponent
   ],
   providers: [/* No providers here*/],
   exports: [
@@ -27,7 +29,8 @@ import { BadComponent } from "./tabbed-pane/bad/bad.component";
     DateValueAccessor,
     TabComponent,
     TabbedPaneComponent,
-    BadComponent
+    BadComponent,
+    PagerComponent
   ]
 })
 export class SharedModule { 

@@ -13,11 +13,5 @@ export class TabComponent  {
   @Input() id: number;
   visible: boolean = true;
 
-  constructor(private service: TabbedPaneService) {
-  }
-
-  next(): void {
-    this.service.next();
-  }
 
 }

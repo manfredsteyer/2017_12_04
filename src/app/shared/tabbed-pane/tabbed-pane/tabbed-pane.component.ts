@@ -1,13 +1,14 @@
-import { Component, OnInit, Input, EventEmitter, Output, AfterContentInit, QueryList, ContentChildren } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output, AfterContentInit, QueryList, ContentChildren, ViewChild } from '@angular/core';
 import { TabComponent } from "../tab/tab.component";
 import { TabbedPaneService } from "../tabbed-pane.service";
+import { PagerComponent } from "../pager/pager.component";
 
 @Component({
   selector: 'tabbed-pane',
   templateUrl: './tabbed-pane.component.html',
   styleUrls: ['./tabbed-pane.component.css'],
   exportAs: 'tabbedPane',
-  providers: [TabbedPaneService]
+  viewProviders: [TabbedPaneService]
 })
 export class TabbedPaneComponent implements OnInit, AfterContentInit {
 
@@ -15,10 +16,13 @@ export class TabbedPaneComponent implements OnInit, AfterContentInit {
   }
 
   ngOnInit() {
-    this.service.nextPage$.subscribe(_ => {
+    this.service.nextPage$.subscribe(offset => {
       let idx = this.tabs.findIndex(t => t.id == this.activeId);
-      if (idx >= this.tabs.length -1) return;
-      let nextIdx = idx + 1;
+      let nextIdx = idx + offset;
+
+      if (nextIdx >= this.tabs.length) return;
+      if (nextIdx < 0) return;
+
       let nextTab = this.tabs[nextIdx];
       this.activate(nextTab.id);
     })
@@ -29,6 +33,11 @@ export class TabbedPaneComponent implements OnInit, AfterContentInit {
 
   @ContentChildren(TabComponent)
   tabList: QueryList<TabComponent>;
+
+  // Just for demonstration!
+  // Try to avoid this and use data binding instead!
+  @ViewChild('pager')
+  pager: PagerComponent;
 
   // tabs: TabComponent[] = [];
 
@@ -52,6 +61,7 @@ export class TabbedPaneComponent implements OnInit, AfterContentInit {
       
       if (tab.id == this.activeId) {
         this.activeTab = tab;
+        this.pager.title = tab.title;
       }
 
     });
