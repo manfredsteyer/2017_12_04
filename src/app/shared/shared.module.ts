@@ -6,6 +6,9 @@ import { AuthGuard } from "./auth/auth.guard";
 import { ExitGuard } from "./exit/exit.guard";
 import { CustomPreloadingStrategy } from "./preload/custom-preloading-strategy.service";
 import { DateValueAccessor } from "./dates/date.directive";
+import { TabComponent } from "./tabbed-pane/tab/tab.component";
+import { TabbedPaneComponent } from "./tabbed-pane/tabbed-pane/tabbed-pane.component";
+import { BadComponent } from "./tabbed-pane/bad/bad.component";
 
 @NgModule({
   imports: [
@@ -13,12 +16,18 @@ import { DateValueAccessor } from "./dates/date.directive";
   ],
   declarations: [
     CityPipe,
-    DateValueAccessor
+    DateValueAccessor,
+    TabComponent,
+    TabbedPaneComponent,
+    BadComponent
   ],
   providers: [/* No providers here*/],
   exports: [
     CityPipe,
-    DateValueAccessor
+    DateValueAccessor,
+    TabComponent,
+    TabbedPaneComponent,
+    BadComponent
   ]
 })
 export class SharedModule { 

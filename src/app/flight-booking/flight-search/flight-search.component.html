@@ -5,26 +5,37 @@
   </div>
   <div class="content">
 
-    <form>
+    <form [formGroup]="filter">
+
+      <h2>Dynamic Form</h2>
+      <div class="form-group" *ngFor="let item of metadata">
+        <label>{{ item.labelKey | translate }}:</label>
+        <input *ngIf="item.type === 'text'" [formControlName]="item.name" class="form-control">
+        <input *ngIf="item.type === 'date'" info="item.type" date [formControlName]="item.name" class="form-control">
+      </div>
+
+      <!-- selector: "input[info=date]" -->
+
+      <h2>Static Form</h2>
 
       <div class="form-group">
         <label>{{ 'FLIGHTS.from' | translate }}:</label>
-        <input [(ngModel)]="from" name="from" class="form-control">
+        <input formControlName="from" class="form-control">
       </div>
 
       <div class="form-group">
         <label>{{ 'FLIGHTS.to' | translate }}:</label>
-        <input [(ngModel)]="to" name="to" class="form-control">
-      </div>
+        <input formControlName="to" class="form-control">
+      </div> Pending: {{ filter.controls['to'].pending | json }}, Valid: {{ filter.controls['to'].valid | json }}, 
 
       <div class="form-group">
         <label>Date:</label>
-        <input [(ngModel)]="date" date name="date" class="form-control">
+        <input formControlName="date" date class="form-control">
       </div>
 
 
       <div class="form-group">
-        <button (click)="search()" [disabled]="!from || !to" class="btn btn-default">
+        <button (click)="search()" [disabled]="!filter.valid" class="btn btn-default">
           {{ 'FLIGHTS.search' | translate }}
         </button>
       </div>

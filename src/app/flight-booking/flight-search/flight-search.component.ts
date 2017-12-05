@@ -3,6 +3,8 @@ import { Flight } from '../../entities/flight';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { FlightService } from './flight.service';
 import { TranslateService } from "@ngx-translate/core";
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { validateCityWithParams, validateCity, validateRoundTrips, validateCityAsync } from "../../shared/validation/city-validators";
 
 @Component({
   selector: 'flight-search',
@@ -12,11 +14,12 @@ import { TranslateService } from "@ngx-translate/core";
 })
 export class FlightSearchComponent implements OnInit {
 
-  from: string;
-   to: string;
+  // from: string;
+  // to: string;
   // flights: Array<Flight> = [];
-   date: string = '2017-12-05T17:00:00.0000+01:00';
+  // date: string = '2017-12-05T17:00:00.0000+01:00';
 
+  filter: FormGroup;
 
   get flights() {
     return this.flightService.flights;
@@ -33,12 +36,55 @@ export class FlightSearchComponent implements OnInit {
   // private http: HttpClient;
 
   constructor(
+    private fb: FormBuilder,
     private translate: TranslateService,
     private flightService: FlightService) {
     // this.http = http;
   }
 
+  metadata = [
+    { name: 'from', labelKey: 'FLIGHTS.from', type: "text" },
+    { name: 'to', labelKey: 'FLIGHTS.to', type: "text" },
+    { name: 'date', labelKey: 'Date', type: "date" }
+  ];
+
   ngOnInit() {
+
+    // init form
+
+    this.filter = this.fb.group({
+      from: [
+        'Graz', 
+        [
+          validateCityWithParams(['Graz', 'Hamburg', 'Zürich']), 
+          Validators.required, 
+          Validators.minLength(3)
+        ]
+      ],
+      to: [
+        'Hamburg', 
+        [
+          // validateCity
+        ],
+        [
+          validateCityAsync(this.flightService)
+        ]
+      ],
+      date: ['2017-11-05']
+    }, { updateOn: 'blur'});
+
+    this.filter.setValidators(validateRoundTrips);
+
+    
+
+    this.filter.valueChanges.subscribe(v => {
+      console.debug('filter changed', v);
+      console.debug('\tfilter changed', v.from);
+      console.debug('\tfilter changed', v.to);
+      console.debug('\tfilter changed', v.date);
+    })
+
+    // init ngx-translate
     let txt = this.translate.instant('FLIGHT.found', {count: 47});
     this.translate.get('FLIGHT.found', {count: 47}).subscribe(txt => console.debug(txt));
 
@@ -47,10 +93,10 @@ export class FlightSearchComponent implements OnInit {
 
   search(): void {
 
-    if (!this.from || !this.to) return;
+    if (!this.filter.value.from || !this.filter.value.to) return;
 
     this.flightService
-        .load(this.from, this.to);
+        .load(this.filter.value.from, this.filter.value.to);
 
     /*
     this.flights.push({

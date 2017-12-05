@@ -9,4 +9,15 @@
 
     </div>
 
+    <tabbed-pane [(activeId)]="activeTab" #tp="tabbedPane">
+        <tab title="Paid" [id]="1">
+            Hier stehen die bezahlten Rechnungen
+        </tab>
+        <tab title="Open" [id]="2">
+            Hier stehen die nicht bezahlten Rechnungen
+        </tab>
+    </tabbed-pane>
+
+    ActiveTab: {{activeTab}}
+    ActiveTitle: {{tp.activeTab?.title}}
 </div>

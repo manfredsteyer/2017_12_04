@@ -11,6 +11,8 @@ export class HomeComponent implements OnInit {
 
   constructor(private authService: AuthService) { }
 
+  activeTab: number = 1;
+  
   ngOnInit() {
   }
 
